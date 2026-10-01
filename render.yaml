@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: ethan-lms
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 60 app:app
+    healthCheckPath: /api/health
+    disk:
+      name: ethan-lms-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: ETHAN_ENV
+        value: production
+      - key: ETHAN_BASE_URL
+        value: https://lms.ethandigitalacademy.org
+      - key: ETHAN_DATA_DIR
+        value: /var/data
+      - key: ETHAN_SECURE_COOKIE
+        value: "1"
+      - key: ETHAN_REQUIRE_VERIFIED_EMAIL
+        value: "1"
+      - key: ETHAN_TRUST_PROXY
+        value: "1"
+      - key: ETHAN_ADMIN_EMAIL
+        sync: false
+      - key: ETHAN_ADMIN_PASSWORD
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: ETHAN_EMAIL_FROM
+        sync: false

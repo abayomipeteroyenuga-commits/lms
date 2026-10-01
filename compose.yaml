@@ -1,0 +1,14 @@
+services:
+  lms:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    env_file: .env
+    environment:
+      ETHAN_DATA_DIR: /var/data
+      PORT: 8080
+    volumes:
+      - lms-data:/var/data
+    restart: unless-stopped
+volumes:
+  lms-data:
