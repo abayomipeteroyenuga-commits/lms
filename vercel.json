@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/:path*",
-      "destination": "https://ethan-erp-lms.onrender.com/:path*"
+      "destination": "/api/proxy?__ethan_proxy_path=/:path*"
     }
   ],
   "headers": [
